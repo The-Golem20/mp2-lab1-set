@@ -49,14 +49,16 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    return FAKE_INT;
+    return 1 << (n % 8);
+    //return FAKE_INT;
 }
 
 // доступ к битам битового поля
 
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
-  return FAKE_INT;
+    return BitLen;
+  //return FAKE_INT;
 }
 
 void TBitField::SetBit(const int n) // установить бит
