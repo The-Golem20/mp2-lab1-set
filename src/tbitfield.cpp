@@ -13,14 +13,32 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
+    if (len <= 0) {
+        throw invalid_argument("Длина должна быть положительным числом");
+    }
+    else {
+        BitLen = len;
+        MemLen = (BitLen + 7) / 8;
+        pMem = new TELEM[MemLen];
+        for (int i; i < MemLen; i++) {
+            pMem[i] = 0;
+        }
+    }
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
+    BitLen = bf.BitLen;
+    MemLen = bf.BitLen;
+    pMem = new TELEM[MemLen];
+    for (int i = 0; i < MemLen; i++) {
+        pMem[i] = bf.pMem[i];
+    }
 }
 
 TBitField::~TBitField()
 {
+
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
